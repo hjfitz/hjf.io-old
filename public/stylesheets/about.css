@@ -1,0 +1,16 @@
+img {
+  max-height: 500px;
+  min-width:auto;
+  border:0;
+}
+
+#profile {
+  border: 10px solid #414141e6;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+#profile:hover {
+  border-radius:10%;
+  border: 3px solid #414141e6;
+}
