@@ -17,4 +17,13 @@ render.get('/projects', (req, res, next) => {
   res.render('projects', { title: 'projects', projects: 'hidden' })
 })
 
+render.get('/notes', (req, res, next) => {
+  res.render('notes', {
+    title: "University Notes",
+    insenote: [
+      {inselink: "note1.html", insetitle:"note1"},
+      {inselink: "note2.html", insetitle:"note2"}
+    ]
+  })
+})
 module.exports = render;
