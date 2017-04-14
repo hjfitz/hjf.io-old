@@ -1,6 +1,6 @@
 var express = require('express');
 var render = express.Router();
-
+const notes = require('./../util/notes')
 /* GET home page. */
 render.get('/', (req, res, next) => {
   res.render('index', {
