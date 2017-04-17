@@ -40,8 +40,9 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500)
-  res.render('400', {
-    title: err.status
+  res.render('404', {
+    title: err.status,
+    layout:false
   })
 })
 
