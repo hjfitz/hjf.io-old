@@ -10,13 +10,11 @@ Run this like any other node package. `npm install` and then `npm run`!
 ### Install node and npm
 This website uses nodejs, and npm to manage the requirements; they need to be installed on your system.
 
-#### Ubuntu
-`sudo apt install nodejs-legacy npm`
-#### Debian
-`sudo apt-get install nodejs npm`
-#### Arch
-`sudo pacman -S nodejs npm`
-#### Fedora
-`sudo dnf install nodejs npm`
+#### Linux 
+```bash
+sudo $(packagemanager install) nodejs npm
+```
+
+**Sidenote:** If you use Ubuntu, you may have to install `nodejs-legacy` because of some issues with `npm`.
 #### Windows
 `install a proper OS and come back to this`
