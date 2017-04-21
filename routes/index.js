@@ -14,11 +14,15 @@ render.get('/', (req, res, next) => {
 })
 
 render.get('/about', (req, res, next) => {
-  res.render('about', { title: 'about', about: 'hidden' })
+  res.render('about', { title: 'About Me', about: 'hidden' })
 })
 
 render.get('/projects', (req, res, next) => {
-  res.render('projects', { title: 'projects', projects: 'hidden' })
+  res.render('projects', { title: 'Projects', projects: 'hidden' })
+})
+
+render.get('/question', (req, res, next) => {
+  res.render('question', { title: 'Question Time' })
 })
 
 render.get('/notes', (req, res, next) => {
