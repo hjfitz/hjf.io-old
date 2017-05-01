@@ -1,4 +1,5 @@
 const express = require('express');
+const util = require('../util');
 
 const render = express.Router();
 
@@ -30,6 +31,20 @@ render.get('/notes', (req, res) => {
       { inselink: 'note1.html', insetitle: 'note1' },
       { inselink: 'note2.html', insetitle: 'note2' },
     ],
+  });
+});
+
+render.get('/grades', (req, res) => {
+  res.render('grade', {
+    title: 'Grade Calculator',
+  });
+});
+
+render.get('/docs', (req, res) => {
+  const files = util.docs.getFiles();
+  res.render('docs', {
+    title: 'University Notes',
+    files,
   });
 });
 
