@@ -4,16 +4,45 @@ const welcomeForm = document.getElementById('welcome-form');
 const setSub = document.getElementById('set-submissions');
 const gradePercents = [];
 
+const findMarksRequired = function fundMarksRequired(kn, unk) {
+  const total = kn.reduce((acc, val) => acc + val, 0);
+  const remainingPercent = unk.reduce((acc, val) => acc + val, 0);
+  const first = (70 - total) / remainingPercent;
+  console.log(unk);
+  console.log(total)
+  console.log(first);
+};
+
 const parseSubmissions = function parseSubmissions() {
+  const knownGradeMultPercentages = [];
+  const unknownPercs = [];
+  let totalPercent = 0;
   gradePercents.forEach((entry) => {
-    console.log(entry);
+    const curPerc = parseInt(entry.percent.value, 10);
+    // work on validation here
+    // TODO
+    if (entry.grade.value != 0) {
+      const curGrade = parseInt(entry.grade.value, 10);
+      const curPart = curGrade * (0.01 * curPerc);
+      knownGradeMultPercentages.push(curPart);
+    } else {
+      unknownPercs.push(curPerc);
+    }
+    totalPercent += parseInt(entry.percent.value, 10);
   });
+  // check to see if data entered correctly
+  if (totalPercent !== 100) {
+    // do something
+  } else {
+    findMarksRequired(knownGradeMultPercentages, unknownPercs);
+    // 70 = current grades * current percentages + unknown grade(s) * current percentages
+    // unknown grade = (70 - current grades * current percentages) / remaining percentages
+  }
 };
 
 const showInputs = function showInputs() {
   // start by getting the number of units
   const numUnits = numUnitsInput.value || numUnitsInput.placeholder;
-  console.log(numUnits);
   // then by hiding the initial inputArea
   welcomeForm.parentElement.removeChild(welcomeForm);
   // create a new form, for the user to enter input regarding their subs.

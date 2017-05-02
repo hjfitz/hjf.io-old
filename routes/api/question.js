@@ -11,7 +11,7 @@ let counter = 0;
 // has a max of 10 pings per person
 const limiter = new RateLimit({
   windowMs: 2 * 60 * 1000,
-  max: 10,
+  max: 50,
   delayMs: 0,
 });
 
