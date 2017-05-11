@@ -7,10 +7,13 @@ const gradePercents = [];
 const findMarksRequired = function fundMarksRequired(kn, unk) {
   const total = kn.reduce((acc, val) => acc + val, 0);
   const remainingPercent = unk.reduce((acc, val) => acc + val, 0);
-  const first = (70 - total) / remainingPercent;
-  console.log(unk);
-  console.log(total)
-  console.log(first);
+  const grades = {
+    first: (70 - total) / remainingPercent,
+    twoOne: (60 - total) / remainingPercent,
+    twoTwo: (50 - total) / remainingPercent,
+    third: (40 - total) / remainingPercent,
+  };
+  console.log(grades);
 };
 
 const parseSubmissions = function parseSubmissions() {
@@ -19,10 +22,9 @@ const parseSubmissions = function parseSubmissions() {
   let totalPercent = 0;
   gradePercents.forEach((entry) => {
     const curPerc = parseInt(entry.percent.value, 10);
-    // work on validation here
-    // TODO
-    if (entry.grade.value != 0) {
-      const curGrade = parseInt(entry.grade.value, 10);
+    const curGrade = parseInt(entry.grade.value, 10);
+    console.log(curGrade);
+    if (curGrade !== 0) {
       const curPart = curGrade * (0.01 * curPerc);
       knownGradeMultPercentages.push(curPart);
     } else {

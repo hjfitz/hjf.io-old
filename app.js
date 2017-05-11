@@ -39,6 +39,7 @@ app.use((err, req, res) => {
 
   // render the error page
   res.status(err.status || 500);
+  // res.location('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
   res.render('404', {
     title: err.status,
     layout: false,
