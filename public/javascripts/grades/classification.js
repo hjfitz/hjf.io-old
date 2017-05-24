@@ -22,7 +22,8 @@ const addYear = function addYear(YearNo, container) {
   tableContainer.classList = 'table';
   const level = YearNo + 3;
   tableContainer.id = `table-l${level}`;
-  tableContainer.innerHTML = `<header class="table-header">
+  tableContainer.innerHTML = `
+  <header class="table-header">
     <h2>Year ${YearNo}</h2>
   </header>
   <div id="table-wrap-l${level}" class="table-wrapper">
