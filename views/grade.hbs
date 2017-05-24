@@ -1,13 +1,51 @@
+<link rel=stylesheet href=stylesheets/grade.css type=text/css>
 <section>
   <header>
     <h1>{{title}}</h1>
   </header>
-  <div id="grade-input">
-    <form id="welcome-form">
-      <label>How many submissions do you have?</label>
-      <input id="num-units" placeholder="2">
-      <button id="set-submissions">Set</button>
-    </form>
-  </div>
 </section>
-<script type="text/javascript" src="javascripts/grade.js"></script>
+
+<section class="calc" id="classification-generator">
+  <header>
+    <h2>Degree Classification Calculator</h2>
+  </header>
+  <form id="classification-main">
+
+
+    <div id='tables'>
+
+    </div>
+
+
+    <label for="integrated-masters-check">Intgrated Masters?</label>
+    <input id='masterstoggle' type="checkbox" name="integrated-masters-check">
+
+  </form>
+
+</section>
+
+  <section class="calc">
+    <header>
+      <h2>Calculate Remaining Grade</h2>
+    </header>
+    <div id="grade-input">
+      <form id="welcome-form">
+        <label for="num-units">How many submissions do you have?</label>
+        <input type='text' id="num-units" placeholder="2">
+        <button id="set-submissions">Set</button>
+      </form>
+    </div>
+    <div id='grade-result'>
+      <p>To attain the following, you need:</p>
+      <p>A first: <span id='first'></span></p>
+      <p>A 2:1: <span id='twoOne'></span></p>
+      <p>A 2:2: <span id='twoTwo'></span></p>
+      <p>A third: <span id='third'></span></p>
+    </div>
+  </section>
+
+
+
+</section>
+<script type="text/javascript" src="javascripts/grades/grade.js"></script>
+<script type="text/javascript" src="javascripts/grades/classification.js"></script>

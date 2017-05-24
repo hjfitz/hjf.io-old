@@ -1,0 +1,39 @@
+.calc {
+  padding-bottom: 5%;
+}
+
+.table-wrapper {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.col {
+  display:inline;
+}
+
+.table-header {
+  display:block;
+  width:100%;
+}
+
+button {
+  background-color: #fff;
+  color:#000;
+  border: 1px solid black;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor:pointer;
+  max-width:50px;
+  text-align: center;
+}
+
+button:hover {
+  background-color:#eceff1;
+}
+
+input[type=text] {
+  border: 0;
+  border-bottom: 1px solid #212121;
+  margin: 3px;
+
+}

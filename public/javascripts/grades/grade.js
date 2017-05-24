@@ -4,6 +4,14 @@ const welcomeForm = document.getElementById('welcome-form');
 const setSub = document.getElementById('set-submissions');
 const gradePercents = [];
 
+const putGradesOnPage = function putGradesOnPage(grades) {
+  Object.keys(grades).forEach((key) => {
+    const curSpan = document.getElementById(key);
+    const formattedGrade = (grades[key] * 100).toFixed();
+    curSpan.textContent = (formattedGrade > 0 ? `${formattedGrade}%` : 'You\'ve already got this');
+  });
+};
+
 const findMarksRequired = function fundMarksRequired(kn, unk) {
   const total = kn.reduce((acc, val) => acc + val, 0);
   const remainingPercent = unk.reduce((acc, val) => acc + val, 0);
@@ -13,6 +21,7 @@ const findMarksRequired = function fundMarksRequired(kn, unk) {
     twoTwo: (50 - total) / remainingPercent,
     third: (40 - total) / remainingPercent,
   };
+  putGradesOnPage(grades);
   console.log(grades);
 };
 
@@ -21,9 +30,8 @@ const parseSubmissions = function parseSubmissions() {
   const unknownPercs = [];
   let totalPercent = 0;
   gradePercents.forEach((entry) => {
-    const curPerc = parseInt(entry.percent.value, 10);
-    const curGrade = parseInt(entry.grade.value, 10);
-    console.log(curGrade);
+    const curPerc = parseInt(entry.percent.value, 10) || 0;
+    const curGrade = parseInt(entry.grade.value, 10) || 0;
     if (curGrade !== 0) {
       const curPart = curGrade * (0.01 * curPerc);
       knownGradeMultPercentages.push(curPart);
@@ -46,15 +54,17 @@ const showInputs = function showInputs() {
   // start by getting the number of units
   const numUnits = numUnitsInput.value || numUnitsInput.placeholder;
   // then by hiding the initial inputArea
-  welcomeForm.parentElement.removeChild(welcomeForm);
+  welcomeForm.parentElement.innerHTML = '';
   // create a new form, for the user to enter input regarding their subs.
   const workOutArea = document.createElement('div');
   for (let i = 0; i < numUnits; i += 1) {
     const container = document.createElement('div');
     const inputPercent = document.createElement('input');
     const inputGrade = document.createElement('input');
-    inputGrade.placeholder = 'grade you got (73%, 40% etc)';
-    inputPercent.placeholder = 'percentage of unit (60, 50 etc)';
+    inputGrade.type = 'text';
+    inputPercent.type = 'text';
+    inputGrade.placeholder = 'grade you got';
+    inputPercent.placeholder = 'percentage of unit';
     gradePercents.push({
       percent: inputPercent,
       grade: inputGrade,
