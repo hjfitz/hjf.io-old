@@ -7,32 +7,16 @@
  * calculates classification using Rule 1
  */
 const calcHonoursFourtySixty = function calcHonoursFourtySixty(year2, year3) {
-  const normalYear2 = removeWorstTwenty(year2);
-  const normalYear3 = removeWorstTwenty(year3);
   const year2Calc = (normalYear2.reduce((acc, val) => acc + val.grade, 0)) / normalYear2.length;
   const year3Calc = (normalYear3.reduce((acc, val) => acc + val.grade, 0)) / normalYear3.length;
   const classification = (year2Calc * 0.4) + (year3Calc * 0.6);
   return classification;
 };
 
-/**
- * @param year3 an array of JSON with grade information
- * JSON must at least contain a 'grade' and 'credits' attribute
- * Removes worst 20 credits and averages
- */
-const calcHonoursLevelSixOnly = function calcHonoursLevelSixOnly(year3) {
-  const normalYear3 = removeWorstTwenty(year3);
-  const flattenedGrades = normalYear3.reduce((acc, val) => acc + val.grade, 0);
-  const classification = flattenedGrades / year3.length;
-  return classification;
-};
-
 const calcHonoursRule3 = function calcHonoursRule3(year2, year3) {
-  const normalYear2 = removeWorstTwenty(year2);
-  const normalYear3 = removeWorstTwenty(year3);
-  const allGrades = [...normalYear2, ...normalYear3].map(grade => grade.grade);
-  allGrades.sort().splice(5);
-  const classification = allGrades.reduce((acc, val) => acc + val, 0) / 5;
+  const allGrades = [...year2, ...year3].map(grade => grade.grade);
+  allGrades.sort().splice(6);
+  const classification = sumGrades(allGrades) / 6;
   return classification;
 };
 

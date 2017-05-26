@@ -2,8 +2,51 @@ let integratedmasters = false;
 const mastersToggle = document.getElementById('masterstoggle');
 const btnCalc = document.getElementById('calc-classification');
 
+const calcClassification = function calcClassification() {
+  // declare something to store clasifications in
+  const classifications = [];
+  // first, normalise the grades
+  parseGrades();
+  // then, remove the worst twenty credits
+  [grades.year2, grades.year3, grades.year4].map(grades => removeWorstTwenty(grades));
+  const year2Average = sumGrades(grades.year2) / grades.year2.average;
+  const year3Average = sumGrades(grades.year3) / grades.year3.average;
+  if (integratedmasters) {
+    const year4Average = sumGrades(grades.year4) / grades.year4.average;
+    classifications.push(calcMasters.rule1(year3Average, year4Average));
+    classifications.push(calcMasters.rule2(year2Average, year3Average, year4Average));
+  } else {
+    classifications.push(calcHonours.rule1(year2Average, year3Average));
+    classifications.push(year3Average);
+    classifications.push(calcHonours.rule3(grades.year2, grades.year3));
+  }
+};
+
 const validateInputs = function validateInputs() {
-  //something
+  // get input boxes
+  const gradeBoxes = document.getElementsByClassname('grade');
+  const credBoxes = document.getElementsByClassname('cred');
+  let valid = true;
+
+  // *efficiently* iterate through both sets of input and ensure they're correct
+  gradeBoxes.forEach((input) => {
+    // if the input box is null or a letter, parseInt returns NaN
+    // meaning that it's not less than 0 nor greater than 100
+    const val = parseInt(input.value, 10);
+    if (val >= 100 || val <= 0) {
+      input.classList += 'error-input';
+      valid = false;
+    }
+  });
+
+  credBoxes.forEach((input) => {
+    const val = parseInt(input.value, 10);
+    if (val !== 20 || val !== 30 || val !== 40) {
+      input.classList = 'error-input';
+      valid = false;
+    }
+  });
+  if (valid) calcClassification();
 };
 
 /**

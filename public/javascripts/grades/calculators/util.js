@@ -18,13 +18,16 @@ const compareGrade = function compareGrade(grade1, grade2) {
  * removes using filter
  */
 const removeWorstTwenty = function removeWorstTwenty(rawGrades) {
-  let sortedGrades = rawGrades.sort(compareGrade);
-  if (sortedGrades[0].cred === 40) {
-    sortedGrades.cred = 20;
-  } else {
-    sortedGrades = sortedGrades.splice(1);
+  if (rawGrades.length >= 1) {
+    let sortedGrades = rawGrades.sort(compareGrade);
+    if (sortedGrades[0].cred === 40) {
+      sortedGrades.cred = 20;
+    } else {
+      sortedGrades = sortedGrades.splice(1);
+    }
+    return sortedGrades;
   }
-  return sortedGrades;
+  return 0;
 };
 
 /**
@@ -32,9 +35,7 @@ const removeWorstTwenty = function removeWorstTwenty(rawGrades) {
  * @return sum of all of the grades
  */
 const sumGrades = function sumGrades(rawGrades) {
-  return rawGrades
-    .map(grade => grade.grade)
-    .reduce((acc, val) => acc + val, 0);
+  return rawGrades.reduce((acc, val) => acc + val.grade, 0);
 };
 
 const formatDOMItem = function formatDOMItem(item) {

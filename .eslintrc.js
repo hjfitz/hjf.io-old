@@ -5,6 +5,7 @@ module.exports = {
     ],
     "env": {
     "browser": true,
-    "node": true,
-  }
+    "node": true
+  },
+  "no-param-reassign": ["error", { "props": false }]
 };
