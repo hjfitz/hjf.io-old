@@ -7,22 +7,20 @@
  * calculates classification using Rule 1
  */
 const calcHonoursFourtySixty = function calcHonoursFourtySixty(year2, year3) {
-  const year2Calc = (normalYear2.reduce((acc, val) => acc + val.grade, 0)) / normalYear2.length;
-  const year3Calc = (normalYear3.reduce((acc, val) => acc + val.grade, 0)) / normalYear3.length;
-  const classification = (year2Calc * 0.4) + (year3Calc * 0.6);
+  const classification = (year2 * 0.4) + (year3 * 0.6);
   return classification;
 };
 
 const calcHonoursRule3 = function calcHonoursRule3(year2, year3) {
   const allGrades = [...year2, ...year3].map(grade => grade.grade);
   allGrades.sort().splice(6);
-  const classification = sumGrades(allGrades) / 6;
+  console.log(allGrades);
+  const classification = parseInt(sumGrades(allGrades), 10) / 6;
   return classification;
 };
 
 const calcHonours = {
   rule1: calcHonoursFourtySixty,
-  rule2: calcHonoursLevelSixOnly,
   rule3: calcHonoursRule3,
 };
 

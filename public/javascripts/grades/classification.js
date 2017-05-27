@@ -3,30 +3,49 @@ const mastersToggle = document.getElementById('masterstoggle');
 const btnCalc = document.getElementById('calc-classification');
 
 const calcClassification = function calcClassification() {
+  // get the places to put the classifications
+  const rule1 = document.getElementById('rule1-results');
+  const rule2 = document.getElementById('rule2-results');
+  const rule3 = document.getElementById('rule3-results');
+
   // declare something to store clasifications in
   const classifications = [];
+
   // first, normalise the grades
   parseGrades();
+
   // then, remove the worst twenty credits
   [grades.year2, grades.year3, grades.year4].map(grades => removeWorstTwenty(grades));
+
+  // calculate the average grades
   const year2Average = sumGrades(grades.year2) / grades.year2.average;
   const year3Average = sumGrades(grades.year3) / grades.year3.average;
+
+  // if it's an integrates master's degree, use different rules!
   if (integratedmasters) {
+
+    // get the average of the MEng year
     const year4Average = sumGrades(grades.year4) / grades.year4.average;
-    classifications.push(calcMasters.rule1(year3Average, year4Average));
-    classifications.push(calcMasters.rule2(year2Average, year3Average, year4Average));
+
+    // and populate the span tags!
+    rule1.textContent = calcMasters.rule1(year3Average, year4Average)
+    rule2.textContent = calcMasters.rule2(year2Average, year3Average, year4Average);
   } else {
-    classifications.push(calcHonours.rule1(year2Average, year3Average));
-    classifications.push(year3Average);
-    classifications.push(calcHonours.rule3(grades.year2, grades.year3));
+    rule1.textContent = calcHonours.rule1(year2Average, year3Average);
+    rule2.textContent = year3Average;
+    rule3.textContent = calcHonours.rule3(grades.year2, grades.year3);
   }
 };
 
 const validateInputs = function validateInputs() {
   // get input boxes
-  const gradeBoxes = document.getElementsByClassname('grade');
-  const credBoxes = document.getElementsByClassname('cred');
+  let gradeBoxes = document.getElementsByClassName('grade');
+  let credBoxes = document.getElementsByClassName('cred');
   let valid = true;
+
+  // use some hacky destructuring to change from HTML collection to array
+  gradeBoxes = [...gradeBoxes];
+  credBoxes = [...credBoxes];
 
   // *efficiently* iterate through both sets of input and ensure they're correct
   gradeBoxes.forEach((input) => {
@@ -63,6 +82,8 @@ const addUnit = function addUnit(ev) {
   [nameArea, percArea, credArea].forEach((area) => {
     const newInput = document.createElement('input');
     newInput.type = 'text';
+    const inputType = area.dataset.name;
+    if (inputType === 'cred') newInput.placeholder = '20';
     newInput.classList = area.dataset.name;
     newInput.dataset.name = area.dataset.name;
     area.appendChild(newInput);
@@ -120,13 +141,16 @@ const addYear = function addYear(YearNo, container) {
 };
 
 const toggleMastersYear = function toggleMastersYear() {
+  const rule3Para = document.getElementById('rule3');
   if (integratedmasters) {
     const mastersTable = document.getElementById('table-l7');
     mastersTable.parentElement.removeChild(mastersTable);
     integratedmasters = false;
+    rule3Para.classList = 'hidden';
   } else {
     addYear(4, 'tables');
     integratedmasters = true;
+    rule3Para.classList = '';
   }
 };
 
@@ -134,5 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
   addYear(2, 'tables');
   addYear(3, 'tables');
 });
+
+btnCalc.addEventListener('click', validateInputs);
 
 mastersToggle.addEventListener('click', toggleMastersYear);

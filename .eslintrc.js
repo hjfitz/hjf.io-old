@@ -7,5 +7,7 @@ module.exports = {
     "browser": true,
     "node": true
   },
-  "no-param-reassign": ["error", { "props": false }]
+  "rules": {
+    "no-param-reassign": ["error", { "props": false }]
+  }
 };
