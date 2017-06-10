@@ -1,0 +1,17 @@
+{{!-- content goes here --}}
+
+<section class='playlist-picker'>
+  {{!-- use some handlebars magic to populate --}}
+  {{#each playlists}}
+    <p data-type='{{type}}'>{{name}}</p>
+    {{/each}}
+</section>
+
+<section>
+  {{!-- player goes here --}}
+</section>
+
+
+
+<script type='text/javascript' src='javascripts/util/ajax.js'></script>
+<script type='text/javascript' src='javascripts/study.js'></script>

@@ -1,4 +1,4 @@
-const study = require('express').router();
+const study = require('express').Router();
 
 const playlists = require('../../util').studyPlaylist;
 
@@ -10,3 +10,5 @@ study.get('/:playlist', (req, res) => {
     res.json({ status: 404, message: `Playlist "${playlist}" not found!` });
   }
 });
+
+module.exports = study;

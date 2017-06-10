@@ -12,7 +12,7 @@ class Ajax {
     xhr.send();
   }
 
-  static postJSON(toPost, url) {
+  static updatePlaylist(toPost, url) {
     let sending = `${url}?playlist=${encodeURIComponent(toPost.playlist)}`;
     sending += `&videoID=${encodeURIComponent(toPost.videoID)}`;
     const xhr = new XMLHttpRequest();
